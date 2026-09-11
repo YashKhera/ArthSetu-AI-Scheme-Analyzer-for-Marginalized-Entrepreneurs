@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Profile - ArthSetu</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    .profile-container {
+      min-height: 100vh;
+      padding: var(--spacing-xl) 0;
+    }
+
+    .profile-header {
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .profile-form {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .form-section {
+      background: var(--color-warm-white);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-lg);
+      border: 1px solid var(--color-border);
+    }
+
+    .form-section-title {
+      font-size: var(--font-size-lg);
+      font-weight: 700;
+      margin-bottom: var(--spacing-md);
+      color: var(--color-navy);
+      padding-bottom: var(--spacing-sm);
+      border-bottom: 2px solid var(--color-border);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-md);
+    }
+  </style>
+<script src="js/theme.js"></script>
+  <script src="js/i18n.js"></script>
+</head>
+<body>
+  <!-- Simple Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo">ArthSetu</a>
+        <div class="nav-links">
+          <a href="index.html" class="btn btn-link" data-i18n="nav.home">Home</a>
+          <a href="questionnaire.html" class="btn btn-link" data-i18n="nav.find">Find Schemes</a>
+          <a href="saved-schemes.html" class="btn btn-link" data-i18n="nav.saved">Saved Schemes</a>
+          <a href="profile-view.html" class="btn btn-link" data-i18n="nav.profile">My Profile</a>
+          <button onclick="Storage.logout()" class="btn btn-link" data-i18n="nav.logout">Logout</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="profile-container">
+    <div class="container">
+      <div class="profile-header">
+        <h1 data-i18n="profile.title">Complete Your Profile</h1>
+        <p class="text-muted" data-i18n="profile.subtitle">Help us understand your business to find relevant schemes</p>
+      </div>
+
+      <!-- Alert -->
+      <div id="alert" class="hidden"></div>
+
+      <!-- Profile Form -->
+      <form id="profileForm" class="profile-form">
+        <!-- Contact Information -->
+        <div class="form-section">
+          <h2 class="form-section-title">Contact Information</h2>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fullName" class="form-label form-label-required">Full Name</label>
+              <input type="text" id="fullName" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="phone" class="form-label form-label-required">Phone Number</label>
+              <input type="tel" id="phone" class="form-input" required placeholder="10-digit number">
+            </div>
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="form-section">
+          <h2 class="form-section-title">Location</h2>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="state" class="form-label form-label-required">State</label>
+              <select id="state" class="form-select" required>
+                <option value="">Select State</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Punjab">Punjab</option>
+                <option value="West Bengal">West Bengal</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="district" class="form-label form-label-required">District</label>
+              <input type="text" id="district" class="form-input" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- Demographics -->
+        <div class="form-section">
+          <h2 class="form-section-title">About You</h2>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ageGroup" class="form-label form-label-required">Age Group</label>
+              <select id="ageGroup" class="form-select" required>
+                <option value="">Select Age Group</option>
+                <option value="18-25">18-25</option>
+                <option value="26-35">26-35</option>
+                <option value="36-45">36-45</option>
+                <option value="46-55">46-55</option>
+                <option value="55+">55+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="gender" class="form-label form-label-required">Gender</label>
+              <select id="gender" class="form-select" required>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="socialCategory" class="form-label form-label-required">Social Category</label>
+            <select id="socialCategory" class="form-select" required>
+              <option value="">Select Category</option>
+              <option value="general">General</option>
+              <option value="obc">OBC</option>
+              <option value="sc">SC</option>
+              <option value="st">ST</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Business Information -->
+        <div class="form-section">
+          <h2 class="form-section-title">Business Information</h2>
+          <div class="form-group">
+            <label for="businessName" class="form-label form-label-required">Business/Enterprise Name</label>
+            <input type="text" id="businessName" class="form-input" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="businessSector" class="form-label form-label-required">Business Sector</label>
+              <select id="businessSector" class="form-select" required>
+                <option value="">Select Sector</option>
+                <option value="agriculture">Agriculture</option>
+                <option value="food_processing">Food Processing</option>
+                <option value="manufacturing">Manufacturing</option>
+                <option value="retail">Retail</option>
+                <option value="services">Services</option>
+                <option value="technology">Technology</option>
+                <option value="textile">Textile</option>
+                <option value="handicrafts">Handicrafts</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="businessStage" class="form-label form-label-required">Business Stage</label>
+              <select id="businessStage" class="form-select" required>
+                <option value="">Select Stage</option>
+                <option value="idea">Just an idea</option>
+                <option value="planning">Planning to start</option>
+                <option value="existing">Already operating</option>
+                <option value="expanding">Looking to expand</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="annualIncome" class="form-label form-label-required">Annual Income Range</label>
+              <select id="annualIncome" class="form-select" required>
+                <option value="">Select Range</option>
+                <option value="<1L">Less than ₹1 Lakh</option>
+                <option value="1L-5L">₹1-5 Lakh</option>
+                <option value="5L-10L">₹5-10 Lakh</option>
+                <option value="10L-25L">₹10-25 Lakh</option>
+                <option value="25L-50L">₹25-50 Lakh</option>
+                <option value="50L-1Cr">₹50 Lakh - ₹1 Crore</option>
+                <option value="1Cr+">Above ₹1 Crore</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="employeeRange" class="form-label form-label-required">Number of Employees</label>
+              <select id="employeeRange" class="form-select" required>
+                <option value="">Select Range</option>
+                <option value="0">Just me</option>
+                <option value="1-5">1-5</option>
+                <option value="6-10">6-10</option>
+                <option value="11-50">11-50</option>
+                <option value="50+">50+</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Support Needed -->
+        <div class="form-section">
+          <h2 class="form-section-title">What Support Do You Need?</h2>
+          <div class="form-help mb-md">Select all that apply</div>
+          <div class="form-checkbox-group">
+            <label class="form-checkbox">
+              <input type="checkbox" name="support" value="loan"> Loan
+            </label>
+            <label class="form-checkbox">
+              <input type="checkbox" name="support" value="subsidy"> Subsidy
+            </label>
+            <label class="form-checkbox">
+              <input type="checkbox" name="support" value="training"> Training
+            </label>
+            <label class="form-checkbox">
+              <input type="checkbox" name="support" value="equipment"> Equipment Support
+            </label>
+            <label class="form-checkbox">
+              <input type="checkbox" name="support" value="machinery"> Machinery
+            </label>
+            <label class="form-checkbox">
+              <input type="checkbox" name="support" value="funding"> Funding
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+          Complete Profile & Continue
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/pages/profile.js"></script>
+</body>
+</html>

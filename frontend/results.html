@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recommended Schemes - ArthSetu</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    .results-container {
+      min-height: 100vh;
+      padding: var(--spacing-xl) 0;
+    }
+
+    .results-header {
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .results-header h1 {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .results-summary {
+      background: var(--color-cream);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-xl);
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+    }
+
+    .summary-item {
+      flex: 1;
+    }
+
+    .summary-number {
+      font-size: var(--font-size-2xl);
+      font-weight: 700;
+      color: var(--color-terracotta);
+    }
+
+    .summary-label {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+    }
+
+    .filters {
+      background: var(--color-warm-white);
+      padding: var(--spacing-md);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-lg);
+      display: flex;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .filter-label {
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+    }
+
+    .filter-select {
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+    }
+
+    #searchInput {
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      min-width: 220px;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-xl);
+      flex-wrap: wrap;
+    }
+
+    .page-btn {
+      min-width: 38px;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border: 1px solid var(--color-border);
+      background: var(--color-cream);
+      color: var(--color-navy);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .page-btn:hover:not(:disabled) {
+      background: var(--color-sage);
+    }
+
+    .page-btn.active {
+      background: var(--color-terracotta);
+      color: #fff;
+      border-color: var(--color-terracotta);
+    }
+
+    .page-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+  </style>
+<script src="js/theme.js"></script>
+  <script src="js/i18n.js"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo">ArthSetu</a>
+        <div class="nav-links">
+          <a href="index.html" class="btn btn-link" data-i18n="nav.home">Home</a>
+          <a href="questionnaire.html" class="btn btn-link" data-i18n="nav.find">Find Schemes</a>
+          <a href="saved-schemes.html" class="btn btn-link" data-i18n="nav.saved">Saved Schemes</a>
+          <a href="profile-view.html" class="btn btn-link" data-i18n="nav.profile">My Profile</a>
+          <button onclick="Storage.logout()" class="btn btn-link" data-i18n="nav.logout">Logout</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="results-container">
+    <div class="container">
+      <!-- Header -->
+      <div class="results-header">
+        <h1 data-i18n="results.title">Your Recommended Schemes</h1>
+        <p class="text-muted" data-i18n="results.subtitle">Based on your profile and preferences</p>
+      </div>
+
+      <!-- Summary -->
+      <div class="results-summary" id="resultsSummary">
+        <div class="summary-item">
+          <div class="summary-number" id="totalSchemes">0</div>
+          <div class="summary-label" data-i18n="summary.found">Schemes Found</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-number" id="highMatch">0</div>
+          <div class="summary-label" data-i18n="summary.high">High Match</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-number" id="savedCount">0</div>
+          <div class="summary-label" data-i18n="summary.saved">Saved</div>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters">
+        <div class="filter-group">
+          <span class="filter-label" data-i18n="filter.search">Search:</span>
+          <input type="text" id="searchInput" placeholder="Search schemes..." oninput="ResultsController.applyFilters()">
+        </div>
+        <div class="filter-group">
+          <span class="filter-label" data-i18n="filter.sort">Sort by:</span>
+          <select class="filter-select" id="sortFilter" onchange="ResultsController.sortSchemes()">
+            <option value="match">Best Match</option>
+            <option value="name">Name (A-Z)</option>
+            <option value="amount">Amount (High to Low)</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label" data-i18n="filter.min">Min Match:</span>
+          <select class="filter-select" id="matchFilter" onchange="ResultsController.applyFilters()">
+            <option value="0">All</option>
+            <option value="50">50%+</option>
+            <option value="70">70%+</option>
+            <option value="85">85%+</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Results Grid -->
+      <div id="resultsGrid"></div>
+
+      <!-- Pagination -->
+      <div class="pagination hidden" id="pagination"></div>
+
+      <!-- Empty State -->
+      <div class="empty-state hidden" id="emptyState">
+        <h2 data-i18n="no.schemes">No Schemes Found</h2>
+        <p class="text-muted mb-lg" data-i18n="no.subtext">We couldn't find any schemes matching your criteria.</p>
+        <a href="profile.html" class="btn btn-primary" data-i18n="empty.cta">Update Your Profile</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/matching.js"></script>
+  <script src="js/components/scheme-card.js"></script>
+  <script src="js/pages/results.js"></script>
+</body>
+</html>

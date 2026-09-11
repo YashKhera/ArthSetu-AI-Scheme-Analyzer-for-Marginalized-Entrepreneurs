@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saved Schemes - ArthSetu</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    .saved-container {
+      min-height: 100vh;
+      padding: var(--spacing-xl) 0;
+    }
+
+    .saved-header {
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .saved-header h1 {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .saved-summary {
+      background: var(--color-cream);
+      padding: var(--spacing-md);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-xl);
+      text-align: center;
+      font-size: var(--font-size-base);
+    }
+
+    .saved-summary strong {
+      color: var(--color-terracotta);
+    }
+
+    #savedGrid {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+  </style>
+<script src="js/theme.js"></script>
+  <script src="js/i18n.js"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo">ArthSetu</a>
+        <div class="nav-links">
+          <a href="index.html" class="btn btn-link" data-i18n="nav.home">Home</a>
+          <a href="questionnaire.html" class="btn btn-link" data-i18n="nav.find">Find Schemes</a>
+          <a href="saved-schemes.html" class="btn btn-link" data-i18n="nav.saved">Saved Schemes</a>
+          <a href="profile-view.html" class="btn btn-link" data-i18n="nav.profile">My Profile</a>
+          <button onclick="Storage.logout()" class="btn btn-link" data-i18n="nav.logout">Logout</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="saved-container">
+    <div class="container">
+      <div class="saved-header">
+        <h1 data-i18n="saved.title">Your Saved Schemes</h1>
+        <p class="text-muted" data-i18n="saved.subtitle">Schemes you have bookmarked for later review</p>
+      </div>
+
+      <div class="saved-summary">
+        <span data-i18n="saved.countPre">You have saved</span> <strong id="savedCount">0</strong> <span data-i18n="saved.countPost">scheme(s)</span>
+      </div>
+
+      <!-- Saved Schemes Grid -->
+      <div id="savedGrid"></div>
+
+      <!-- Empty State -->
+      <div class="empty-state hidden" id="emptyState">
+        <h2 data-i18n="saved.none.title">No Saved Schemes</h2>
+        <p class="text-muted mb-lg" data-i18n="saved.none.subtext">Browse recommended schemes and save the ones you like.</p>
+        <a href="questionnaire.html" class="btn btn-primary" data-i18n="nav.find">Find Schemes</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/matching.js"></script>
+  <script src="js/components/scheme-card.js"></script>
+  <script src="js/pages/saved.js"></script>
+</body>
+</html>

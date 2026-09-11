@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signing you in - ArthSetu</title>
+
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+
+  <style>
+    .oauth-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-lg);
+    }
+
+    .oauth-box {
+      width: 100%;
+      max-width: 24rem;
+      text-align: center;
+    }
+
+    .oauth-title {
+      font-size: var(--font-size-xl);
+      font-weight: 700;
+      color: var(--color-navy);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .oauth-desc {
+      color: var(--color-text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="oauth-container">
+    <div class="oauth-box card">
+      <h2 class="oauth-title">Signing you in...</h2>
+      <p class="oauth-desc">Please wait while we connect your account.</p>
+    </div>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/pages/oauth.js"></script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - ArthSetu</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    .auth-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-lg);
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 24rem; /* shadcn max-w-sm */
+    }
+
+    /* shadcn CardHeader */
+    .shadcn-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .shadcn-title {
+      font-size: var(--font-size-xl);
+      font-weight: 700;
+      color: var(--color-navy);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .shadcn-desc {
+      color: var(--color-text-muted);
+      font-size: var(--font-size-sm);
+    }
+
+    .shadcn-action {
+      white-space: nowrap;
+    }
+
+    /* shadcn CardContent */
+    .shadcn-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem; /* gap-6 */
+    }
+
+    .shadcn-field {
+      display: grid;
+      gap: 0.5rem; /* grid gap-2 */
+    }
+
+    .shadcn-label-row {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .shadcn-label-row .form-label {
+      margin-bottom: 0;
+    }
+
+    .shadcn-link {
+      margin-left: auto;
+      font-size: var(--font-size-sm);
+      color: var(--color-terracotta);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .shadcn-link:hover {
+      color: var(--color-navy);
+    }
+
+    /* shadcn CardFooter */
+    .shadcn-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: var(--spacing-sm);
+    }
+
+    .btn-google {
+      background-color: transparent;
+      color: var(--color-navy);
+      border: 1px solid var(--color-border);
+    }
+
+    .btn-google:hover {
+      background-color: var(--color-navy);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-card">
+      <!-- Alert for messages -->
+      <div id="alert" class="hidden"></div>
+
+      <!-- shadcn Card: Login -->
+      <div id="loginCard" class="card">
+        <div class="shadcn-header">
+          <div>
+            <h2 class="shadcn-title">Login to your account</h2>
+            <p class="shadcn-desc">Enter your email below to login to your account</p>
+          </div>
+          <a href="register.html" class="btn btn-link shadcn-action">Sign Up</a>
+        </div>
+
+        <form id="loginForm" class="shadcn-content">
+          <div class="shadcn-field">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              placeholder="m@example.com"
+              required
+              autofocus
+            >
+          </div>
+
+          <div class="shadcn-field">
+            <div class="shadcn-label-row">
+              <label for="password" class="form-label">Password</label>
+              <a href="#" id="forgotLink" class="shadcn-link">Forgot your password?</a>
+            </div>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-input"
+              required
+            >
+          </div>
+
+          <div class="shadcn-footer">
+            <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+              Login
+            </button>
+            <button type="button" class="btn btn-google btn-block" id="googleBtn">
+              Login with Google
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- shadcn Card: Forgot Password -->
+      <div id="forgotCard" class="card hidden">
+        <div class="shadcn-header">
+          <div>
+            <h2 class="shadcn-title">Reset your password</h2>
+            <p class="shadcn-desc">Enter your email and we'll send you a reset link</p>
+          </div>
+          <a href="#" id="backToLoginLink" class="btn btn-link shadcn-action">Back to Login</a>
+        </div>
+
+        <form id="forgotForm" class="shadcn-content">
+          <div class="shadcn-field">
+            <label for="forgotEmail" class="form-label">Email</label>
+            <input
+              type="email"
+              id="forgotEmail"
+              name="forgotEmail"
+              class="form-input"
+              placeholder="m@example.com"
+              required
+            >
+          </div>
+
+          <div class="shadcn-footer">
+            <button type="submit" class="btn btn-primary btn-block" id="forgotBtn">
+              Send Reset Link
+            </button>
+            <a href="login.html" class="btn btn-google btn-block shadcn-link">Back to Login</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/pages/auth.js"></script>
+</body>
+</html>
